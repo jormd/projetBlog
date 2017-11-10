@@ -8,6 +8,9 @@ app:
     type: annotation
 
 # app/config/routing.yml
+blog:
+    resource: "@UserBundle/Resources/config/routing.yml"
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
