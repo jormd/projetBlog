@@ -8,7 +8,9 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Entity\User as BaseUser;
 
@@ -35,6 +37,7 @@ class User extends BaseUser
      */
     public function __construct()
     {
+        parent::__construct();
     }
 
     /**
@@ -44,4 +47,5 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
 }

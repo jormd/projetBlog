@@ -9,33 +9,11 @@
 namespace UserBundle\Controller;
 
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Core\SecurityContext;
+use FOS\UserBundle\Controller\RegistrationController;
 
 
-class CompteController extends Controller
+
+
+class CompteController extends RegistrationController
 {
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function loginAction(Request $request)
-    {
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            //return $this->redirectToRoute('oc_platform_accueil');
-        }
-
-        $authenticationUtils = $this->get('security.authentication_utils');
-
-        return $this->render('UserBundle:Compte:login.html.twig', array(
-            'last_username' => $authenticationUtils->getLastUsername(),
-            'error'         => $authenticationUtils->getLastAuthenticationError(),
-        ));
-    }
-
-    public function addAction(Request $request)
-    {
-
-    }
 }
