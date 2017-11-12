@@ -27,7 +27,10 @@ class ArticleType extends AbstractType
                     'class' => 'tinymce'
                 ]
             ])
-            ->add('created', DateType::class);
+            ->add('created', DateType::class, array(
+                'input' => 'datetime',
+                'data'  =>  new \DateTime("now"),
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)
