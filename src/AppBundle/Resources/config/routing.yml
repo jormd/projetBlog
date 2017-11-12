@@ -1,0 +1,3 @@
+addArticle:
+    path: /addArticle
+    defaults: {_controller: AppBundle:Article:add}

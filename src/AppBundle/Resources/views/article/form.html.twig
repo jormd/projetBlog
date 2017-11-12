@@ -1,0 +1,13 @@
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        tinymce.init({
+            selector: '.tinymce'
+        });
+    </script>
+{% endblock %}
