@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="Article")
  * Class Article
  * @package AppBundle\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -36,7 +37,7 @@ class Article
     protected $body = 'ceci est le corps';
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date", )
      */
     protected $created;
 
@@ -122,6 +123,15 @@ class Article
     public function setPublier($publier)
     {
         $this->publier = $publier;
+    }
+
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
     }
 
 }

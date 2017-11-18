@@ -4,13 +4,42 @@
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}
+    <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
 {% endblock %}
 
 {% block javascript %}
     {{ parent() }}
+
+    <script src="{{ asset('bundles/app/bower_components/axios/dist/axios.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/bower_components/form-serialize/index.js') }}"></script>
     <script>
         tinymce.init({
-            selector: '.tinymce'
+            selector: '.tinymce',
+            init_instance_callback: function (editor) {
+                editor.on('change', function (e) {
+                    tinyMCE.triggerSave();
+                });
+            }
         });
+
+        setInterval(saveArticle, 10000);
+
+        function saveArticle() {
+            var form = new FormData(document.querySelector('form'));
+
+
+            fetch('{{ path('addAjaxArticle', {'article' : article.id}) }}', {
+                method: "POST",
+                body: form
+            }).then(function () {
+                console.log('hi');
+            });
+
+
+
+
+        }
+
     </script>
+
 {% endblock %}

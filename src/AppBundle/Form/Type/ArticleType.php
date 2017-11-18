@@ -25,18 +25,15 @@ class ArticleType extends AbstractType
             ->add('body', TextareaType::class, [
                 'attr' => [
                     'class' => 'tinymce'
-                ]
-            ])
-            ->add('created', DateType::class, array(
-                'input' => 'datetime',
-                'data'  =>  new \DateTime("now"),
-            ));
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'AppBundle\Entity\Article'
+            'data_class' => 'AppBundle\Entity\Article',
+            'csrf_protection' => false,
         ]);
     }
 
