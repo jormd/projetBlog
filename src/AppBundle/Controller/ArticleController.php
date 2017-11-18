@@ -77,4 +77,24 @@ class ArticleController extends Controller
             'articles' => $articles
         ]);
     }
+
+    public function publishAction(Article $article)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if($article->getPublier()) {
+            $article->setPublier(false);
+        }
+        else{
+            $article->setPublier(true);
+            $article->setDatePublication(new \DateTime());
+        }
+
+        $em->persist($article);
+        $em->flush();
+
+        return new JsonResponse([
+            'code' => 'success'
+        ]);
+    }
 }

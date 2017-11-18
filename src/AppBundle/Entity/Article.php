@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity
@@ -37,7 +38,7 @@ class Article
     protected $body = 'ceci est le corps';
 
     /**
-     * @ORM\Column(type="date", )
+     * @ORM\Column(type="date")
      */
     protected $created;
 
@@ -45,6 +46,11 @@ class Article
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
     protected $publier = false;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $datePublication;
 
     /**
      * Article constructor.
@@ -133,5 +139,23 @@ class Article
     {
         $this->created = new \DateTime("now");
     }
+
+    /**
+     * @return Date
+     */
+    public function getDatePublication(): DateTime
+    {
+        return $this->datePublication;
+    }
+
+    /**
+     * @param Date $datePublication
+     */
+    public function setDatePublication(\DateTime $datePublication)
+    {
+        $this->datePublication = $datePublication;
+    }
+
+
 
 }

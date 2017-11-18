@@ -27,17 +27,10 @@
         function saveArticle() {
             var form = new FormData(document.querySelector('form'));
 
-
             fetch('{{ path('addAjaxArticle', {'article' : article.id}) }}', {
                 method: "POST",
                 body: form
-            }).then(function () {
-                console.log('hi');
             });
-
-
-
-
         }
 
     </script>

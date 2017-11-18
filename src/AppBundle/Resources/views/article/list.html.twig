@@ -1,0 +1,35 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    {% for article in articles %}
+        <div data-id="{{ article.id }}">
+            <input type="checkbox"
+                {% if article.publier %}
+                    checked
+                {% endif %}
+            >
+            {{ article.title }}
+        </div>
+
+    {% endfor %}
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        console.log('hi');
+        var inputs = document.querySelectorAll('input');
+
+        for(var i = 0; i<inputs.length; i++){
+            inputs[i].addEventListener('click', function (e) {
+                var id = this.parentNode.getAttribute('data-id');
+
+                var route = '{{ path('publishArtcile', {'article':"PLACEHOLDER"}) }}';
+
+                route = route.replace("PLACEHOLDER", id);
+                fetch(route, {
+                    method: "POST",
+                });
+            })
+        }
+    </script>
+{% endblock %}
