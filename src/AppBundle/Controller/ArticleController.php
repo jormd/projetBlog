@@ -84,6 +84,8 @@ class ArticleController extends Controller
 
         if($article->getPublier()) {
             $article->setPublier(false);
+            $article->setDatePublication(null);
+
         }
         else{
             $article->setPublier(true);

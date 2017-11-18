@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\ArticleRepository")
  * @ORM\Table(name="Article")
  * Class Article
  * @package AppBundle\Entity
@@ -48,7 +48,7 @@ class Article
     protected $publier = false;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $datePublication;
 
@@ -151,7 +151,7 @@ class Article
     /**
      * @param Date $datePublication
      */
-    public function setDatePublication(\DateTime $datePublication)
+    public function setDatePublication($datePublication)
     {
         $this->datePublication = $datePublication;
     }
