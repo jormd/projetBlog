@@ -141,15 +141,15 @@ class Article
     }
 
     /**
-     * @return Date
+     * @return \DateTime
      */
-    public function getDatePublication(): DateTime
+    public function getDatePublication(): \DateTime
     {
         return $this->datePublication;
     }
 
     /**
-     * @param Date $datePublication
+     * @param \DateTime $datePublication
      */
     public function setDatePublication($datePublication)
     {

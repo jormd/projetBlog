@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\EntityRepository;
 
 class ArticleRepository extends EntityRepository
@@ -19,6 +20,27 @@ class ArticleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
 
         $qb->where($qb->expr()->eq('a.publier', true));
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function lastArticlePublish()
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where($qb->expr()->eq('a.publier', true))
+            ->andWhere($qb->expr()->eq('a.datePublication', ':param'))
+            ->setParameter('param', $this->maxArticleDate(), Type::DATETIME)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function maxArticleDate()
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->select($qb->expr()->max('a.datePublication'));
 
         return $qb->getQuery()->getResult();
     }
