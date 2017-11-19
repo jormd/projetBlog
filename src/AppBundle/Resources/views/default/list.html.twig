@@ -1,0 +1,18 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div>
+        <div class="header">
+            {{ lastArticle.title }}
+        </div>
+        <div class="body">
+            {{ lastArticle.body }}
+        </div>
+        <div class="datePublic">
+            {{ lastArticle.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}
+        </div>
+    </div>
+
+
+
+{% endblock %}
