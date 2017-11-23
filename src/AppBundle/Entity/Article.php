@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
 
@@ -53,10 +54,18 @@ class Article
     protected $datePublication;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commentaire", inversedBy="article")
+     */
+    protected $commentaires;
+
+    /**
      * Article constructor.
      */
     public function __construct()
     {
+        $this->commentaires = new ArrayCollection();
     }
 
     /**
@@ -156,6 +165,30 @@ class Article
         $this->datePublication = $datePublication;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getCommentaires(): ArrayCollection
+    {
+        return $this->commentaires;
+    }
 
+    /**
+     * @param ArrayCollection $commentaires
+     */
+    public function setCommentaires(ArrayCollection $commentaires)
+    {
+        $this->commentaires = $commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire)
+    {
+        $this->commentaires->add($commentaire);
+    }
+
+    public function removeCommentaire(Commentaire $commentaire)
+    {
+        $this->commentaires->remove($commentaire);
+    }
 
 }
