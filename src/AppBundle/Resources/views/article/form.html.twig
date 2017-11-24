@@ -1,0 +1,36 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        tinymce.init({
+            selector: '.tinymce',
+            init_instance_callback: function (editor) {
+                editor.on('change', function (e) {
+                    tinyMCE.triggerSave();
+                });
+            }
+        });
+
+        setInterval(saveArticle, 10000);
+
+        function saveArticle() {
+            var form = new FormData(document.querySelector('form'));
+
+            fetch('{{ path('addAjaxArticle', {'article' : article.id}) }}', {
+                method: "POST",
+                body: form
+            });
+        }
+
+    </script>
+
+{% endblock %}

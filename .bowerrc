@@ -1,0 +1,5 @@
+{
+  "directory": "src/AppBundle/Resources/public/bower_components",
+  "analytics": false,
+  "json": "bower.json"
+}

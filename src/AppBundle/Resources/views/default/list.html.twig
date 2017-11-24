@@ -1,0 +1,27 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div>
+        <div class="header">
+            {{ lastArticle.title }}
+        </div>
+        <div class="body">
+            {{ lastArticle.body }}
+        </div>
+        <div class="datePublic">
+            {{ lastArticle.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}
+        </div>
+        <div class="comment">
+            {% for commentaire in lastArticle.commentaires %}
+                {{ commentaire.texte }}
+            {% endfor %}
+        </div>
+        <form method="post" action="{{ path('addCommentaire', {'article' : lastArticle.id}) }}" name="Commentaire">
+            <input type="text" name="Commentaire[texte]" class="tinymce">
+            <button type="submit">valider</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

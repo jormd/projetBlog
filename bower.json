@@ -1,0 +1,21 @@
+{
+  "name": "my_blog_project",
+  "description": "Symfony Standard Edition ========================",
+  "main": "index.js",
+  "authors": [
+    "romand"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jormd/projetBlog",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "tinymce": "^4.7.2"
+  }
+}

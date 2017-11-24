@@ -1,0 +1,19 @@
+addArticle:
+    path: /bloggeur/addArticle
+    defaults: {_controller: AppBundle:Article:add}
+
+addAjaxArticle:
+    path: /bloggeur/addArticle/ajax/{article}
+    defaults: {_controller: AppBundle:Article:addAjax}
+
+listArticle:
+    path: /bloggeur/list
+    defaults: {_controller: AppBundle:Article:list}
+
+publishArtcile:
+    path: /bloggeur/publishArticle/{article}
+    defaults: {_controller: AppBundle:Article:publish}
+
+addCommentaire:
+    path: /article/{article}/comment
+    defaults: {_controller: AppBundle:Commentaire:add}
