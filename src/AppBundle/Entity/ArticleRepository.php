@@ -31,6 +31,7 @@ class ArticleRepository extends EntityRepository
         $qb->where($qb->expr()->eq('a.publier', true))
             ->andWhere($qb->expr()->eq('a.datePublication', ':param'))
             ->setParameter('param', $this->maxArticleDate(), Type::DATETIME)
+            ->innerJoin('a.commentaires', 'commentaires')
         ;
 
         return $qb->getQuery()->getResult();

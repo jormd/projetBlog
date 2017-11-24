@@ -168,7 +168,7 @@ class Article
     /**
      * @return ArrayCollection
      */
-    public function getCommentaires(): ArrayCollection
+    public function getCommentaires()
     {
         return $this->commentaires;
     }

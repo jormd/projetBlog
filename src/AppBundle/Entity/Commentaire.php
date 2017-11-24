@@ -34,6 +34,13 @@ class Commentaire
     protected $texte;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $dateCreation;
+
+    /**
      * @var Article
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="commentaires")
@@ -81,6 +88,29 @@ class Commentaire
         $this->article = $article;
     }
 
+    /**
+     * @return string
+     */
+    public function getDateCreation(): string
+    {
+        return $this->dateCreation;
+    }
 
+    /**
+     * @param string $dateCreation
+     */
+    public function setDateCreation(string $dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+    }
+
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->dateCreation = new \DateTime("now");
+    }
 
 }
