@@ -56,8 +56,7 @@ class Article
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Commentaire")
-     * @ORM\JoinColumn(name="commentaire_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="article")
      */
     protected $commentaires;
 

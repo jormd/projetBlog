@@ -13,3 +13,7 @@ listArticle:
 publishArtcile:
     path: /bloggeur/publishArticle/{article}
     defaults: {_controller: AppBundle:Article:publish}
+
+addCommentaire:
+    path: /article/{article}/comment
+    defaults: {_controller: AppBundle:Commentaire:add}

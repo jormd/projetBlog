@@ -34,6 +34,14 @@ class Commentaire
     protected $texte;
 
     /**
+     * @var Article
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="commentaires")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     */
+    protected $article;
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -44,7 +52,7 @@ class Commentaire
     /**
      * @return string
      */
-    public function getTexte(): string
+    public function getTexte()
     {
         return $this->texte;
     }
@@ -56,5 +64,23 @@ class Commentaire
     {
         $this->texte = $texte;
     }
+
+    /**
+     * @return Article
+     */
+    public function getArticle(): Article
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param Article $article
+     */
+    public function setArticle(Article $article)
+    {
+        $this->article = $article;
+    }
+
+
 
 }
