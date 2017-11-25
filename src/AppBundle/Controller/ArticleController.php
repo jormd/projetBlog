@@ -78,6 +78,21 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function OneArticleAction(Article $article)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $theArticle = $em->getRepository('AppBundle:Article')->oneArticlePublish($article);
+
+        $articles = $em->getRepository('AppBundle:Article')->articlePublish();
+
+        return $this->render('@App/default/list.html.twig', [
+            'article' => $theArticle[0],
+            'articles' => $articles
+        ]);
+
+    }
+
     public function publishAction(Article $article)
     {
         $em = $this->getDoctrine()->getManager();

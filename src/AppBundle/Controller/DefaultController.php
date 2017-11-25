@@ -20,7 +20,7 @@ class DefaultController extends Controller
 
 
         return $this->render('@App/default/list.html.twig', [
-            'lastArticle' => $lastArticle[0],
+            'article' => $lastArticle[0],
             'articles' => $articles
         ]);
         // replace this example code with whatever you need

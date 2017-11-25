@@ -24,6 +24,18 @@ class ArticleRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function oneArticlePublish(Article $article)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb->where($qb->expr()->eq('a.publier', true))
+            ->andWhere($qb->expr()->eq('a.id', ':id'))
+            ->innerJoin('a.commentaires', 'commentaires')
+            ->setParameter('id', $article->getId());
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function lastArticlePublish()
     {
         $qb = $this->createQueryBuilder('a');

@@ -4,31 +4,33 @@
     <div class="row">
         <div class="col-sm-10">
             <div class="header">
-                <h1>{{ lastArticle.title }}</h1>
+                <h1>{{ article.title }}</h1>
             </div>
             <div class="body">
-                {{ lastArticle.body }}
+                {{ article.body }}
             </div>
             <div class="datePublic">
-                <p>{{ lastArticle.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}</p>
+                <p>{{ article.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}</p>
             </div>
             <div class="comment">
-                {% for commentaire in lastArticle.commentaires %}
+                {% for commentaire in article.commentaires %}
                     {% include '@App/article/lineCommentaire.html.twig' with {'commentaire' : commentaire} %}
                 {% endfor %}
             </div>
             <div class="addComment">
-                <form method="post" action="{{ path('addCommentaire', {'article' : lastArticle.id}) }}" name="Commentaire">
+                <form method="post" action="{{ path('addCommentaire', {'article' : article.id}) }}" name="Commentaire">
                     <input type="text" name="Commentaire[texte]" class="tinymce">
                     <a id="submit" type="submit" onclick="saveComment()">valider</a>
                 </form>
             </div>
         </div>
         <div class="col-sm-2">
-            {% for article in articles %}
+            {% for oneArticle in articles %}
                 <div class="badge">
-                    <span>{{ article.title }}</span>
-                    <span>{{ article.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
+                    <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}">
+                        <span>{{ oneArticle.title }}</span>
+                        <span>{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
+                    </a>
                 </div>
             {% endfor %}
         </div>
