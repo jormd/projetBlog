@@ -71,10 +71,13 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine();
 
-        $articles = $em->getRepository('AppBundle:Article')->findAll();
+        $articles = $em->getRepository('AppBundle:Article')->findBy(array(), array('created' => 'ASC'));
+
+        $commentaires = $em->getRepository('AppBundle:Commentaire')->findBy(array(), array('dateCreation' => 'ASC'));
 
         return $this->render('AppBundle:article:list.html.twig', [
-            'articles' => $articles
+            'articles' => $articles,
+            'commentaires' => $commentaires
         ]);
     }
 
