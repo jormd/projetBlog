@@ -8,16 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
+
+
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine();
 
-        $lastArticle = $em->getRepository('AppBundle:Article')->lastArticlePublish();
+        $lastArticle = $em->getRepository('AppBundle:Article')->lastArticlePublish()?:null;
         $articles = $em->getRepository('AppBundle:Article')->articlePublish();
-
 
         return $this->render('@App/default/list.html.twig', [
             'article' => $lastArticle[0],

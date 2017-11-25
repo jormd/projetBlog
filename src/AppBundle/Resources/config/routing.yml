@@ -21,3 +21,7 @@ addCommentaire:
 showOneArticle:
     path: /article/{article}/
     defaults: {_controller: AppBundle:Article:OneArticle}
+
+homepage:
+    path: /
+    defaults: {_controller: AppBundle:Default:index}
