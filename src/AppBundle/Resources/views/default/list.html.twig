@@ -1,27 +1,62 @@
 {% extends '@App/base.html.twig' %}
 
 {% block body %}
-    <div>
-        <div class="header">
-            {{ lastArticle.title }}
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="header">
+                <h1>{{ article.title }}</h1>
+            </div>
+            <div class="body">
+                {{ article.body }}
+            </div>
+            <div class="datePublic">
+                <p>{{ article.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}</p>
+            </div>
+            <div class="comment">
+                {% for commentaire in article.commentaires %}
+                    {% include '@App/article/lineCommentaire.html.twig' with {'commentaire' : commentaire} %}
+                {% endfor %}
+            </div>
+            <div class="addComment">
+                <form method="post" action="{{ path('addCommentaire', {'article' : article.id}) }}" name="Commentaire">
+                    <input type="text" name="Commentaire[texte]" class="tinymce">
+                    <a id="submit" type="submit" onclick="saveComment()">valider</a>
+                </form>
+            </div>
         </div>
-        <div class="body">
-            {{ lastArticle.body }}
-        </div>
-        <div class="datePublic">
-            {{ lastArticle.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}
-        </div>
-        <div class="comment">
-            {% for commentaire in lastArticle.commentaires %}
-                {{ commentaire.texte }}
+        <div class="col-sm-2">
+            {% for oneArticle in articles %}
+                <div class="badge">
+                    <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}">
+                        <span>{{ oneArticle.title }}</span>
+                        <span>{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
+                    </a>
+                </div>
             {% endfor %}
         </div>
-        <form method="post" action="{{ path('addCommentaire', {'article' : lastArticle.id}) }}" name="Commentaire">
-            <input type="text" name="Commentaire[texte]" class="tinymce">
-            <button type="submit">valider</button>
-        </form>
     </div>
 
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
 
+    <script>
+        tinymce.init({
+            selector: '.tinymce',
+            init_instance_callback: function (editor) {
+                editor.on('change', function (e) {
+                    tinyMCE.triggerSave();
+                });
+            }
+        });
 
+        function saveComment(e)
+        {
+            var form = $('form');
+
+            $.post(form.attr('action'), form.serialize()).done(function (data) {
+                $('div.comment').append(data['html'])
+            });
+        }
+    </script>
 {% endblock %}

@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class Commentaire
  * @package AppBundle\Entity
  * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks
  */
 class Commentaire
 {
@@ -34,9 +35,8 @@ class Commentaire
     protected $texte;
 
     /**
-     * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="datetime")
      */
     protected $dateCreation;
 
@@ -91,7 +91,7 @@ class Commentaire
     /**
      * @return string
      */
-    public function getDateCreation(): string
+    public function getDateCreation()
     {
         return $this->dateCreation;
     }
@@ -99,7 +99,7 @@ class Commentaire
     /**
      * @param string $dateCreation
      */
-    public function setDateCreation(string $dateCreation)
+    public function setDateCreation(\DateTime $dateCreation)
     {
         $this->dateCreation = $dateCreation;
     }
