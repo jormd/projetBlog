@@ -1,4 +1,36 @@
-.article{
-  text-align: center;
+.Article{
 
+  .header,.body{
+    text-align: center;
+  }
+
+  .datePublic{
+    text-align: right;
+    size: 8px;
+  }
+
+  .commentaire{
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #EDF7F2;
+    border-radius: 4px;
+  }
+
+  .listeArticle{
+    .cartouche{
+      padding: 5px;
+      margin-bottom: 4px;
+      background-color: #779ECB;
+      font-size: 10px;
+      a.lien{
+        color: white;
+      }
+      span.dateArticle{
+          text-align: right;
+          color: white;
+        }
+
+    }
+  }
 }
+
