@@ -10,7 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
+use UserBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\ArticleRepository")
@@ -59,6 +59,14 @@ class Article
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Commentaire", mappedBy="article")
      */
     protected $commentaires;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="articles")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $auteur;
 
     /**
      * Article constructor.
@@ -191,4 +199,19 @@ class Article
         $this->commentaires->remove($commentaire);
     }
 
+    /**
+     * @return User
+     */
+    public function getAuteur(): User
+    {
+        return $this->auteur;
+    }
+
+    /**
+     * @param User $auteur
+     */
+    public function setAuteur(User $auteur)
+    {
+        $this->auteur = $auteur;
+    }
 }

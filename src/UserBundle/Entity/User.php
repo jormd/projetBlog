@@ -8,11 +8,10 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
+use AppBundle\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -31,6 +30,13 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article", mappedBy="auteur")
+     */
+    protected $articles;
+
 
     /**
      * User constructor.
@@ -46,6 +52,29 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param ArrayCollection $articles
+     */
+    public function setArticles(ArrayCollection $articles)
+    {
+        $this->articles = $articles;
+    }
+
+    public function addArticle(Article $article)
+    {
+        $this->articles->add($article);
+    }
+
+    public function removeArticle(Article $article)
+    {
+        $this->articles->remove($article);
     }
 
 }

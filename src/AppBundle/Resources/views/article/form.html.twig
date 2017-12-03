@@ -23,12 +23,8 @@
         setInterval(saveArticle, 10000);
 
         function saveArticle() {
-            var form = new FormData(document.querySelector('form'));
-
-            fetch('{{ path('addAjaxArticle', {'article' : article.id}) }}', {
-                method: "POST",
-                body: form
-            });
+            var form = $('form');
+            $.post('{{ path('addAjaxArticle', {'article' : article.id}) }}', form.serialize());
         }
 
     </script>
