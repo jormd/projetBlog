@@ -31,6 +31,8 @@ class ArticleController extends Controller
             ["action" => $url]
             )->handleRequest($request);
 
+        $article->setAuteur($this->getUser());
+
         $em->persist($article);
         $em->flush();
 
@@ -52,8 +54,12 @@ class ArticleController extends Controller
         )->handleRequest($request);
 
 
+
         if ($form->isValid())
         {
+
+            $article->setAuteur($this->getUser());
+
             $em->persist($article);
             $em->flush();
 
@@ -71,9 +77,9 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine();
 
-        $articles = $em->getRepository('AppBundle:Article')->findBy(array(), array('created' => 'ASC'));
+        $articles = $em->getRepository('AppBundle:Article')->findByUser($this->getUser());
 
-        $commentaires = $em->getRepository('AppBundle:Commentaire')->findBy(array(), array('dateCreation' => 'ASC'));
+        $commentaires = $em->getRepository('AppBundle:Commentaire')->findByUser($this->getUser());
 
         return $this->render('AppBundle:article:list.html.twig', [
             'articles' => $articles,
