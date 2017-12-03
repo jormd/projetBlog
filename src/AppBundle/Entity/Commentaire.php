@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Commentaire
  * @package AppBundle\Entity
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\CommentaireRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Commentaire

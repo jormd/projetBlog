@@ -2,38 +2,45 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-sm-10">
-            <div class="header">
-                <h1>{{ article.title }}</h1>
+        <div class="Article">
+            <div class="col-sm-10">
+                {% if article is not null %}
+                    <div class="header">
+                        <h1>{{ article.title }}</h1>
+                    </div>
+                    <div class="body">
+                        {{ article.body|raw }}
+                    </div>
+                    <div class="datePublic">
+                        <p>{{ article.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}</p>
+                    </div>
+                    <div class="comment">
+                        <h2>Commentaire</h2>
+                        {% for commentaire in article.commentaires %}
+                            {% include '@App/article/lineCommentaire.html.twig' with {'commentaire' : commentaire} %}
+                        {% endfor %}
+                    </div>
+                    <div class="addComment">
+                        <form method="post" action="{{ path('addCommentaire', {'article' : article.id}) }}" name="Commentaire">
+                            <input type="text" name="Commentaire[texte]" class="tinymce">
+                            <a id="submit" type="submit" onclick="saveComment()">valider</a>
+                        </form>
+                    </div>
+                {% endif %}
             </div>
-            <div class="body">
-                {{ article.body }}
-            </div>
-            <div class="datePublic">
-                <p>{{ article.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}</p>
-            </div>
-            <div class="comment">
-                {% for commentaire in article.commentaires %}
-                    {% include '@App/article/lineCommentaire.html.twig' with {'commentaire' : commentaire} %}
+            <div class="col-sm-2 listeArticle">
+                {% for oneArticle in articles %}
+                    <div class="cartouche">
+                        <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}" class="lien">
+                            <span>{{ oneArticle.title }}</span>
+                        </a>
+                        <br>
+                        <span class="dateArticle">{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
+                    </div>
                 {% endfor %}
             </div>
-            <div class="addComment">
-                <form method="post" action="{{ path('addCommentaire', {'article' : article.id}) }}" name="Commentaire">
-                    <input type="text" name="Commentaire[texte]" class="tinymce">
-                    <a id="submit" type="submit" onclick="saveComment()">valider</a>
-                </form>
-            </div>
         </div>
-        <div class="col-sm-2">
-            {% for oneArticle in articles %}
-                <div class="badge">
-                    <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}">
-                        <span>{{ oneArticle.title }}</span>
-                        <span>{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+
     </div>
 
 {% endblock %}

@@ -34,7 +34,7 @@ class Article
     protected $title = 'Ceci est un titre';
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     protected $body = 'ceci est le corps';
 

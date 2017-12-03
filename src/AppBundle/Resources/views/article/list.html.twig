@@ -1,17 +1,29 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    {% for article in articles %}
-        <div data-id="{{ article.id }}">
-            <input type="checkbox"
-                {% if article.publier %}
-                    checked
-                {% endif %}
-            >
-            {{ article.title }}
+    <div class="row">
+        <div class="col-sm-3">
+            {% for article in articles %}
+                <div data-id="{{ article.id }}">
+                    <input type="checkbox"
+                            {% if article.publier %}
+                                checked
+                            {% endif %}
+                    >
+                    {{ article.title }}
+                </div>
+            {% endfor %}
         </div>
+        <div class="col-sm-9">
+            {% for commentaire in commentaires %}
+                <div id="commentaire{{ commentaire.id }}">
+                    <p>{{ commentaire.texte }}</p>
+                    <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
-    {% endfor %}
 {% endblock %}
 
 {% block javascript %}
@@ -19,7 +31,7 @@
         console.log('hi');
         var inputs = document.querySelectorAll('input');
 
-        for(var i = 0; i<inputs.length; i++){
+        for (var i = 0; i < inputs.length; i++) {
             inputs[i].addEventListener('click', function (e) {
                 var id = this.parentNode.getAttribute('data-id');
 

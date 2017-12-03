@@ -13,3 +13,6 @@
 .idea/
 node_modules/
 /src/AppBundle/Resources/public/bower_components/
+/web/css/
+.DS_Store
+/web/.DS_Store

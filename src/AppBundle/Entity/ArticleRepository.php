@@ -30,7 +30,7 @@ class ArticleRepository extends EntityRepository
 
         $qb->where($qb->expr()->eq('a.publier', true))
             ->andWhere($qb->expr()->eq('a.id', ':id'))
-            ->innerJoin('a.commentaires', 'commentaires')
+            ->leftJoin('a.commentaires', 'commentaires')
             ->setParameter('id', $article->getId());
 
         return $qb->getQuery()->getResult();
@@ -43,7 +43,7 @@ class ArticleRepository extends EntityRepository
         $qb->where($qb->expr()->eq('a.publier', true))
             ->andWhere($qb->expr()->eq('a.datePublication', ':param'))
             ->setParameter('param', $this->maxArticleDate(), Type::DATETIME)
-            ->innerJoin('a.commentaires', 'commentaires')
+            ->leftJoin('a.commentaires', 'commentaires')
         ;
 
         return $qb->getQuery()->getResult();
