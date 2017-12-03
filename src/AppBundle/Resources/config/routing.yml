@@ -10,7 +10,7 @@ listArticle:
     path: /bloggeur/list
     defaults: {_controller: AppBundle:Article:list}
 
-publishArtcile:
+publishArticle:
     path: /bloggeur/publishArticle/{article}
     defaults: {_controller: AppBundle:Article:publish}
 

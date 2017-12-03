@@ -1,6 +1,6 @@
 .Article{
 
-  .header,.body{
+  .header{
     text-align: center;
   }
 
@@ -12,7 +12,7 @@
   .commentaire{
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #EDF7F2;
+    background-color: #C9BCB9;
     border-radius: 4px;
   }
 
@@ -20,7 +20,7 @@
     .cartouche{
       padding: 5px;
       margin-bottom: 4px;
-      background-color: #779ECB;
+      background-color: #777;
       font-size: 10px;
       a.lien{
         color: white;
