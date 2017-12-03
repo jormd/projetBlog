@@ -24,8 +24,6 @@
 
         function saveArticle() {
             var form = $('form');
-            console.log(form);
-
             $.post('{{ path('addAjaxArticle', {'article' : article.id}) }}', form.serialize());
         }
 
