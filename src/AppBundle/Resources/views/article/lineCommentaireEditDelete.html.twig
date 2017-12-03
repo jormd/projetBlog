@@ -1,0 +1,10 @@
+    <div class="col-sm-10">
+        <div id="commentaire{{ commentaire.id }}">
+            <p>{{ commentaire.texte|raw }}</p>
+            <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <a href="">edit</a>
+        <a href="{{ path('deleteCommentaire', {'commentaire' : commentaire.id}) }}">delete</a>
+    </div>

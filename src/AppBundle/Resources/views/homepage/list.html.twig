@@ -17,7 +17,7 @@
                     <div class="comment">
                         <h2>Commentaire</h2>
                         {% for commentaire in article.commentaires %}
-                            {% include '@App/article/lineCommentaire.html.twig' with {'commentaire' : commentaire} %}
+                            {% include '@App/homepage/lineCommentaire.html.twig' with {'commentaire' : commentaire} %}
                         {% endfor %}
                     </div>
                     <div class="addComment">

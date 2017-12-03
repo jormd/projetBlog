@@ -16,10 +16,7 @@
         </div>
         <div class="col-sm-9">
             {% for commentaire in commentaires %}
-                <div id="commentaire{{ commentaire.id }}">
-                    <p>{{ commentaire.texte }}</p>
-                    <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
-                </div>
+                {% include 'AppBundle:article:lineCommentaireEditDelete.html.twig' with {'commentaire' : commentaire} %}
             {% endfor %}
         </div>
     </div>

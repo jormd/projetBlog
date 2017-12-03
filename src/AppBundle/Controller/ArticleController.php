@@ -95,7 +95,7 @@ class ArticleController extends Controller
 
         $articles = $em->getRepository('AppBundle:Article')->articlePublish();
 
-        return $this->render('@App/default/list.html.twig', [
+        return $this->render('@App/homepage/list.html.twig', [
             'article' => $theArticle[0],
             'articles' => $articles
         ]);

@@ -49,4 +49,16 @@ class CommentaireController extends Controller
             'code' => 'error'
         ]);
     }
+
+    public function deleteAction(Commentaire $commentaire)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($commentaire);
+        $em->flush();
+
+        return new JsonResponse([
+            'code' => 'success'
+        ]);
+    }
 }
