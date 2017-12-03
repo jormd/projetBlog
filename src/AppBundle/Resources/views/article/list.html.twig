@@ -27,21 +27,22 @@
 {% endblock %}
 
 {% block javascript %}
+    {{ parent() }}
     <script>
-        console.log('hi');
-        var inputs = document.querySelectorAll('input');
+        $(function () {
+            var inputs = $('input');
 
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].addEventListener('click', function (e) {
-                var id = this.parentNode.getAttribute('data-id');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener('click', function (e) {
+                    var id = $(this).closest('div').attr('data-id');
 
-                var route = '{{ path('publishArtcile', {'article':"PLACEHOLDER"}) }}';
+                    var route = '{{ path('publishArticle', {'article':"PLACEHOLDER"}) }}';
 
-                route = route.replace("PLACEHOLDER", id);
-                fetch(route, {
-                    method: "POST",
-                });
-            })
-        }
+                    route = route.replace("PLACEHOLDER", id);
+                    $.post(route)
+                })
+            }
+        })
+
     </script>
 {% endblock %}
