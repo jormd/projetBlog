@@ -17,7 +17,7 @@ class DefaultController extends Controller
         $lastArticle = $em->getRepository('AppBundle:Article')->lastArticlePublish()?:null;
         $articles = $em->getRepository('AppBundle:Article')->articlePublish();
 
-        return $this->render('@App/default/list.html.twig', [
+        return $this->render('@App/homepage/list.html.twig', [
             'article' => $lastArticle[0],
             'articles' => $articles
         ]);
