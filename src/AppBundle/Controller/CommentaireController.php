@@ -39,7 +39,7 @@ class CommentaireController extends Controller
 
             return new JsonResponse([
                 'code' => 'success',
-                'html' => $this->renderView('@App/article/lineCommentaire.html.twig', [
+                'html' => $this->renderView('@App/homepage/lineCommentaire.html.twig', [
                     'commentaire' => $commentaire
                 ])
             ]);
