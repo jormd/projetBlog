@@ -18,6 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends Controller
 {
 
+    /**
+     * Création d'un article par un bloggeur
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -42,6 +48,13 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * Sauveaarde automatique d'un article tous les 10 secondes
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return JsonResponse
+     */
     public function addAjaxAction(Request $request, Article $article){
         $em = $this->getDoctrine()->getManager();
 
@@ -73,13 +86,29 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * Affiche tous les articles par rapport à un utilisateur
+     *
+     * un bloggeur voient tous ces article publier ou non avec les dernier commentaire
+     *
+     * un admin voient tous les articles et tous les commentaires
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction()
     {
         $em = $this->getDoctrine();
 
-        $articles = $em->getRepository('AppBundle:Article')->findByUser($this->getUser());
+        if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+            $articles = $em->getRepository('AppBundle:Article')->findAll();
+            $commentaires = $em->getRepository('AppBundle:Commentaire')->findAll();
+        }
+        else{
+            $articles = $em->getRepository('AppBundle:Article')->findByUser($this->getUser());
+            $commentaires = $em->getRepository('AppBundle:Commentaire')->findByUser($this->getUser());
+        }
 
-        $commentaires = $em->getRepository('AppBundle:Commentaire')->findByUser($this->getUser());
+
 
         return $this->render('AppBundle:article:list.html.twig', [
             'articles' => $articles,
@@ -87,6 +116,12 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * affiche le dernier article publier (doit utiliser un dateTime !!!) avec ses commentaires ainsi que les autres article publier
+     *
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function OneArticleAction(Article $article)
     {
         $em = $this->getDoctrine()->getManager();
@@ -102,6 +137,12 @@ class ArticleController extends Controller
 
     }
 
+    /**
+     * Permet de publier ou dépublier un article
+     *
+     * @param Article $article
+     * @return JsonResponse
+     */
     public function publishAction(Article $article)
     {
         $em = $this->getDoctrine()->getManager();

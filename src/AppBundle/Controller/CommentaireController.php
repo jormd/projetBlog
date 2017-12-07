@@ -18,6 +18,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CommentaireController extends Controller
 {
+    /**
+     * @param Request $request
+     * @param Article $article
+     * @return JsonResponse
+     */
     public function addAction(Request $request, Article $article)
     {
         $em = $this->getDoctrine()->getManager();
@@ -50,6 +55,10 @@ class CommentaireController extends Controller
         ]);
     }
 
+    /**
+     * @param Commentaire $commentaire
+     * @return JsonResponse
+     */
     public function deleteAction(Commentaire $commentaire)
     {
         $em = $this->getDoctrine()->getManager();
