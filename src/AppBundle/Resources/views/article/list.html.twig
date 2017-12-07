@@ -26,6 +26,7 @@
 {% block javascript %}
     {{ parent() }}
     <script>
+        //ajout d'un listener sur l'édition d'un article
         $(function () {
             var inputs = $('input');
 
@@ -39,6 +40,16 @@
                     $.post(route)
                 })
             }
+        });
+
+        $('.delete').on('click', function (e) {
+           e.stopImmediatePropagation();
+           $.post($(this).attr('data-href'), function (data) {
+               console.log('hi');
+               console.log(data.id);
+               console.log($(document).find('#commentaire'.concat(data.id)));
+               $(document).find('#commentaire'.concat(data.id)).remove();
+           });
         })
 
     </script>
