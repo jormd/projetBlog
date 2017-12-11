@@ -61,15 +61,23 @@ class CommentaireController extends Controller
      */
     public function deleteAction(Commentaire $commentaire)
     {
-        $em = $this->getDoctrine()->getManager();
-        $id = $commentaire->getId();
+        if($commentaire->getArticle()->getAuteur()->getId() ||
+            $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
+        {
+            $em = $this->getDoctrine()->getManager();
+            $id = $commentaire->getId();
 
-        $em->remove($commentaire);
-        $em->flush();
+            $em->remove($commentaire);
+            $em->flush();
+
+            return new JsonResponse([
+                'code' => 'success',
+                'id' => $id
+            ]);
+        }
 
         return new JsonResponse([
-            'code' => 'success',
-            'id' => $id
+            'code' => 'error'
         ]);
     }
 }
