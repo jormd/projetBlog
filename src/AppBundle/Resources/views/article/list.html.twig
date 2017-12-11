@@ -10,7 +10,7 @@
                                 checked
                             {% endif %}
                     >
-                    {{ article.title }}
+                    <a href="{{ path('editArticle', {'article' : article.id}) }}">{{ article.title }}</a>
                 </div>
             {% endfor %}
         </div>

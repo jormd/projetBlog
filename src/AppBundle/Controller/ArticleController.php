@@ -49,6 +49,55 @@ class ArticleController extends Controller
     }
 
     /**
+     * Edition d'un article
+     *
+     * @param Request $request
+     * @param Article $article
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editArticleAction(Request $request, Article $article)
+    {
+        if($article->getAuteur()->getId() == $this->getUser()->getId() ||
+            $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $url = $this->generateUrl('addArticle');
+
+            $form = $this->createForm(
+                new ArticleType(),
+                $article,
+                ["action" => $url]
+            )->handleRequest($request);
+
+            return $this->render('@App/article/editionArticle.twig', [
+                'form' => $form->createView(),
+                'article' => $article
+            ]);
+        }
+        return new JsonResponse([
+            'code' => "error"
+        ]);
+    }
+
+    public function deleteArticleAction(Article $article)
+    {
+        if($article->getAuteur()->getId() == $this->getUser()->getId() ||
+            $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN'))
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->remove($article);
+            $em->flush();
+
+            return new JsonResponse([
+                'code' => 'success',
+            ]);
+        }
+
+        return new JsonResponse([
+            'code' => 'error',
+        ]);
+    }
+
+    /**
      * Sauveaarde automatique d'un article tous les 10 secondes
      *
      * @param Request $request
@@ -147,21 +196,27 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if($article->getPublier()) {
-            $article->setPublier(false);
-            $article->setDatePublication(null);
+        if($article->getAuteur()->getId()){
+            if($article->getPublier()) {
+                $article->setPublier(false);
+                $article->setDatePublication(null);
 
-        }
-        else{
-            $article->setPublier(true);
-            $article->setDatePublication(new \DateTime());
-        }
+            }
+            else{
+                $article->setPublier(true);
+                $article->setDatePublication(new \DateTime());
+            }
 
-        $em->persist($article);
-        $em->flush();
+            $em->persist($article);
+            $em->flush();
+
+            return new JsonResponse([
+                'code' => 'success'
+            ]);
+        }
 
         return new JsonResponse([
-            'code' => 'success'
+            'code' => 'error'
         ]);
     }
 }
