@@ -14,5 +14,6 @@
 node_modules/
 /src/AppBundle/Resources/public/bower_components/
 /web/css/
+/web/img/
 .DS_Store
 /web/.DS_Store

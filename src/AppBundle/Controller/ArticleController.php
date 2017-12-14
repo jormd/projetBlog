@@ -44,7 +44,8 @@ class ArticleController extends Controller
 
         return $this->render('@App/article/form.html.twig',[
             'form' => $form->createView(),
-            'article' => $article
+            'article' => $article,
+            'images' => $em->getRepository('AppBundle:Image')->findAll()
         ]);
     }
 

@@ -1,10 +1,18 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+    <div class="col-md-10">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+        <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+    </div>
+    <div class="col-md-2 image">
+        {% for image in images %}
+            <img src="{{ asset(image.pathFichier) }}" height="100" width="100"/>
+        {% endfor %}
+    </div>
+
 {% endblock %}
 
 {% block javascript %}
