@@ -23,18 +23,25 @@ deleteArticle:
     path: /bloggeur/deleteArticle/{article}
     defaults: {_controller: AppBundle:Article:deleteArticle}
 
+showOneArticle:
+    path: /article/{article}/
+    defaults: {_controller: AppBundle:Article:OneArticle}
+
 ## Commentaire
 addCommentaire:
     path: /article/{article}/comment
     defaults: {_controller: AppBundle:Commentaire:add}
 
-showOneArticle:
-    path: /article/{article}/
-    defaults: {_controller: AppBundle:Article:OneArticle}
-
 deleteCommentaire:
     path: /bloggeur/delete/commentaire/{commentaire}
     defaults: {_controller: AppBundle:Commentaire:delete}
+
+editCommentaire:
+    path: /bloggeur/edit/commentaire/{commentaire}
+    defaults: {_controller: AppBundle:Commentaire:edit}
+
+
+
 
 homepage:
     path: /

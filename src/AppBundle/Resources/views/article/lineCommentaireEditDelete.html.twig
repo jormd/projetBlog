@@ -4,7 +4,8 @@
             <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
     </div>
     <div class="col-sm-2">
-        <a href="">edit</a>
+        <a class="edit" href="#" data-href="{{ path('editCommentaire', {'commentaire' : commentaire.id}) }}">edit</a>
         <a class="delete" href="#" data-href="{{ path('deleteCommentaire', {'commentaire' : commentaire.id}) }}">delete</a>
     </div>
 </div>
+
