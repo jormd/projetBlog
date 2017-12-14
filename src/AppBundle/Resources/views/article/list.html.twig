@@ -10,16 +10,13 @@
                                 checked
                             {% endif %}
                     >
-                    {{ article.title }}
+                    <a href="{{ path('editArticle', {'article' : article.id}) }}">{{ article.title }}</a>
                 </div>
             {% endfor %}
         </div>
         <div class="col-sm-9">
             {% for commentaire in commentaires %}
-                <div id="commentaire{{ commentaire.id }}">
-                    <p>{{ commentaire.texte }}</p>
-                    <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
-                </div>
+                {% include 'AppBundle:article:lineCommentaireEditDelete.html.twig' with {'commentaire' : commentaire} %}
             {% endfor %}
         </div>
     </div>
@@ -29,6 +26,7 @@
 {% block javascript %}
     {{ parent() }}
     <script>
+        //ajout d'un listener sur l'édition d'un article
         $(function () {
             var inputs = $('input');
 
@@ -42,7 +40,48 @@
                     $.post(route)
                 })
             }
+        });
+
+        $(document).on('click', '.delete',  function (e) {
+           e.stopImmediatePropagation();
+           $.post($(this).attr('data-href'), function (data) {
+               console.log('hi');
+               console.log(data.id);
+               console.log($(document).find('#commentaire'.concat(data.id)));
+               $(document).find('#commentaire'.concat(data.id)).remove();
+           });
+        });
+        
+        $(document).on('click', '.edit', function (e) {
+            e.stopImmediatePropagation();
+            $.get($(this).attr('data-href'), function (data) {
+                $(document).find('#'+data.id).replaceWith(data.html);
+                tinymce.remove();
+                tinymce.init({
+                    selector: '.tinymce',
+                    height : 100,
+                    width: 700,
+                    init_instance_callback: function (editor) {
+                        editor.on('change', function (e) {
+                            tinyMCE.triggerSave();
+                        });
+                    }
+                });
+            })
+        });
+
+        $(document).on('click', '#Commentaire_save',  function (e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+
+            var form = $(this).closest('form');
+            $.post(form.attr('action'), form.serialize(), function (data) {
+               $('form').replaceWith(data.html);
+            });
+
         })
+
+
 
     </script>
 {% endblock %}

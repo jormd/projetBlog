@@ -1,3 +1,4 @@
+## Article
 addArticle:
     path: /bloggeur/addArticle
     defaults: {_controller: AppBundle:Article:add}
@@ -14,13 +15,33 @@ publishArticle:
     path: /bloggeur/publishArticle/{article}
     defaults: {_controller: AppBundle:Article:publish}
 
-addCommentaire:
-    path: /article/{article}/comment
-    defaults: {_controller: AppBundle:Commentaire:add}
+editArticle:
+    path: /bloggeur/editArticle/{article}
+    defaults: {_controller: AppBundle:Article:editArticle}
+
+deleteArticle:
+    path: /bloggeur/deleteArticle/{article}
+    defaults: {_controller: AppBundle:Article:deleteArticle}
 
 showOneArticle:
     path: /article/{article}/
     defaults: {_controller: AppBundle:Article:OneArticle}
+
+## Commentaire
+addCommentaire:
+    path: /article/{article}/comment
+    defaults: {_controller: AppBundle:Commentaire:add}
+
+deleteCommentaire:
+    path: /bloggeur/delete/commentaire/{commentaire}
+    defaults: {_controller: AppBundle:Commentaire:delete}
+
+editCommentaire:
+    path: /bloggeur/edit/commentaire/{commentaire}
+    defaults: {_controller: AppBundle:Commentaire:edit}
+
+
+
 
 homepage:
     path: /

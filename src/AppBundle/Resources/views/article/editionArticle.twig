@@ -1,0 +1,43 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+    <a class="del" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">suppression</a>
+
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+
+    <script>
+        tinymce.init({
+            selector: '.tinymce',
+            init_instance_callback: function (editor) {
+                editor.on('change', function (e) {
+                    tinyMCE.triggerSave();
+                });
+            }
+        });
+
+        setInterval(saveArticle, 10000);
+
+        function saveArticle() {
+            var form = $('form');
+            $.post('{{ path('addAjaxArticle', {'article' : article.id}) }}', form.serialize());
+        }
+
+        //suppression de l'article + déplacement vers a liste des articles
+        $('.del').on('click', function (e) {
+            e.stopImmediatePropagation();
+            $.post($(this).attr('data-href'), function () {
+                window.location.href = "{{ path('listArticle') }}"
+            });
+        })
+
+    </script>
+
+{% endblock %}

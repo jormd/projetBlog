@@ -160,7 +160,7 @@ class Article
     /**
      * @return \DateTime
      */
-    public function getDatePublication(): \DateTime
+    public function getDatePublication()
     {
         return $this->datePublication;
     }
@@ -202,7 +202,7 @@ class Article
     /**
      * @return User
      */
-    public function getAuteur(): User
+    public function getAuteur()
     {
         return $this->auteur;
     }
