@@ -40,7 +40,10 @@ editCommentaire:
     path: /bloggeur/edit/commentaire/{commentaire}
     defaults: {_controller: AppBundle:Commentaire:edit}
 
-
+## Image
+addImage:
+    path: /bloggeur/add/image
+    defaults: {_controller: AppBundle:Image:addImage}
 
 
 homepage:

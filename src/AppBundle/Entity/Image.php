@@ -9,11 +9,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity
  * Class Image
  * @package AppBundle\Entity
+ * @Vich\Uploadable
  */
 class Image
 {
@@ -28,14 +33,18 @@ class Image
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+     *
+     * @var UploadedFile
      */
-    protected $name;
+    protected $file;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $nameComplet;
+    protected $imageName;
 
     /**
      * @return mixed
@@ -48,37 +57,37 @@ class Image
     /**
      * @return mixed
      */
-    public function getName()
+    public function getImageName()
     {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNameComplet()
-    {
-        return $this->nameComplet;
+        return $this->imageName;
     }
 
     /**
      * @param mixed $nameComplet
      */
-    public function setNameComplet($nameComplet)
+    public function setImageName($nameComplet)
     {
-        $this->nameComplet = $nameComplet;
+        $this->imageName = $nameComplet;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File $file
+     */
+    public function setFile(File $file)
+    {
+        $this->file = $file;
     }
 
     public function getPathFichier(){
-        return self::$path.$this->getNameComplet();
+        return self::$path.$this->getImageName();
     }
 
 }

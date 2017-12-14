@@ -10,7 +10,9 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Image;
 use AppBundle\Form\Type\ArticleType;
+use AppBundle\Form\Type\ImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,10 +44,19 @@ class ArticleController extends Controller
         $em->persist($article);
         $em->flush();
 
+        $url = $this->generateUrl('addImage');
+
+        $formImage = $this->createForm(
+            new ImageType(),
+            new Image(),
+            ['action' => $url]
+        );
+
         return $this->render('@App/article/form.html.twig',[
             'form' => $form->createView(),
             'article' => $article,
-            'images' => $em->getRepository('AppBundle:Image')->findAll()
+            'images' => $em->getRepository('AppBundle:Image')->findAll(),
+            'formImage' => $formImage->createView()
         ]);
     }
 
