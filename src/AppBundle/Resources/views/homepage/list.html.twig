@@ -62,6 +62,7 @@
             var form = $('form');
 
             $.post(form.attr('action'), form.serialize()).done(function (data) {
+                tinyMCE.activeEditor.setContent('');
                 $('div.comment').append(data['html'])
             });
         }
