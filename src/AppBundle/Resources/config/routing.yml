@@ -1,6 +1,6 @@
 ## Article
 addArticle:
-    path: /bloggeur/addArticle
+    path: /bloggeur/add/article
     defaults: {_controller: AppBundle:Article:add}
 
 addAjaxArticle:
