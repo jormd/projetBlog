@@ -31,12 +31,12 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $title = 'Ceci est un titre';
+    protected $title;
 
     /**
      * @ORM\Column(type="text")
      */
-    protected $body = 'ceci est le corps';
+    protected $body;
 
     /**
      * @ORM\Column(type="date")

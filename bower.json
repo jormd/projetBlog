@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "tinymce": "^4.7.2",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "tinymce-placeholder-attribute": "^0.1.7"
   }
 }

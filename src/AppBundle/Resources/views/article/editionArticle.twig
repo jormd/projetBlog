@@ -1,21 +1,40 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
-    <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
-    <a class="del" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">suppression</a>
+    <div class="col-md-10">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+        <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+        <a class="del" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">suppression</a>
+    </div>
+    <div class="col-md-2 image">
+        {{ form(formImage) }}
+        {% for image in images %}
+            {% include 'AppBundle:image:image.html.twig' with {'image': image} %}
+        {% endfor %}
+    </div>
+
 
 {% endblock %}
 
 
 {% block javascript %}
     {{ parent() }}
+    <script src="{{ asset('bundles/app/bower_components/tinymce-placeholder-attribute/placeholder/plugin.min.js') }}"></script>
 
     <script>
         tinymce.init({
             selector: '.tinymce',
+            plugins: [
+                "advlist autolink lists image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste imagetools",
+                "placeholder"
+            ],
+            paste_data_images: true,
+            image_advtab: true,
+            height: 450,
             init_instance_callback: function (editor) {
                 editor.on('change', function (e) {
                     tinyMCE.triggerSave();

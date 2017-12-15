@@ -18,14 +18,17 @@
 
 {% block javascript %}
     {{ parent() }}
+    <script src="{{ asset('bundles/app/bower_components/tinymce-placeholder-attribute/placeholder/plugin.min.js') }}"></script>
 
     <script>
         tinymce.init({
             selector: '.tinymce',
             plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
+                "advlist autolink lists image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste imagetools"
+                "insertdatetime media table contextmenu paste imagetools",
+                "placeholder"
+
             ],
             paste_data_images: true,
             image_advtab: true,
@@ -43,7 +46,7 @@
             var form = $('form');
             $.post('{{ path('addAjaxArticle', {'article' : article.id}) }}', form.serialize());
         }
-        
+
     </script>
 
 {% endblock %}
