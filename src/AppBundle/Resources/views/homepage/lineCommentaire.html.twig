@@ -1,5 +1,5 @@
 <div id="commentaire{{ commentaire.id }}" class="commentaire">
     {{ commentaire.texte|raw }}
-    <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
+    <p class="date">{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
 
 </div>

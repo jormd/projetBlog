@@ -6,13 +6,16 @@
         {{ form_widget(form) }}
         {{ form_end(form) }}
         <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+        {% if delete is defined and delete %}
+            <a class="del" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">suppression</a>
+        {% endif %}
     </div>
     <div class="col-md-2 image">
+        {{ form(formImage) }}
         {% for image in images %}
             {% include 'AppBundle:image:image.html.twig' with {'image': image} %}
         {% endfor %}
     </div>
-    {{ form(formImage) }}
 
 {% endblock %}
 
@@ -46,6 +49,14 @@
             var form = $('form');
             $.post('{{ path('addAjaxArticle', {'article' : article.id}) }}', form.serialize());
         }
+
+        //suppression de l'article + déplacement vers a liste des articles
+        $('.del').on('click', function (e) {
+            e.stopImmediatePropagation();
+            $.post($(this).attr('data-href'), function () {
+                window.location.href = "{{ path('listArticle') }}"
+            });
+        })
 
     </script>
 

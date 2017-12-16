@@ -93,11 +93,12 @@ class ArticleController extends Controller
                 ['action' => $url]
             );
 
-            return $this->render('@App/article/editionArticle.twig', [
+            return $this->render('@App/article/form.html.twig', [
                 'form' => $form->createView(),
                 'article' => $article,
                 'images' => $em->getRepository('AppBundle:Image')->findAll(),
-                'formImage' => $formImage->createView()
+                'formImage' => $formImage->createView(),
+                'delete' => true
             ]);
         }
         return new JsonResponse([

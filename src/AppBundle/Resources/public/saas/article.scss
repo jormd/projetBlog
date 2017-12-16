@@ -2,6 +2,7 @@
 
   .header{
     text-align: center;
+    padding-bottom: 22px;
   }
 
   .datePublic{
@@ -14,6 +15,14 @@
     margin-bottom: 20px;
     background-color: #C9BCB9;
     border-radius: 4px;
+
+
+  }
+
+  .addComment{
+    button.btn{
+      text-align: right;
+    }
   }
 
   .listeArticle{
@@ -35,10 +44,55 @@
 }
 
 .image{
-  max-height: 510px;
+  max-height: 580px;
   overflow-x: scroll;
   img{
     padding-top: 10px;
   }
 }
 
+.date{
+  text-align: right;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://www.blog.test.fr//MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(http://www.blog.test.fr//MaterialIcons-Regular.woff2) format('woff2'),
+  url(http://www.blog.test.fr//MaterialIcons-Regular.woff) format('woff'),
+  url(http://www.blog.test.fr//MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.editDelete{
+  display: flex;
+  flex-direction: column;
+}
