@@ -30,14 +30,14 @@
             </div>
             <div class="col-sm-2 listeArticle">
                 {% for oneArticle in articles %}
-                    <div class="cartouche">
-                        <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}" class="lien">
+                    <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}" class="lien">
+                        <div class="cartouche">
                             <span>{{ oneArticle.title }}</span>
-                        </a>
-                        <br>
-                        <span class="dateArticle">{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
-                    </div>
-                {% endfor %}
+                            <br>
+                            <span class="dateArticle">{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
+                        </div>
+                    </a>
+            {% endfor %}
             </div>
         </div>
 

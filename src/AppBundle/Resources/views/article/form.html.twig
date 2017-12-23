@@ -5,9 +5,9 @@
         {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_end(form) }}
-        <a href="{{ path('listArticle') }}" onclick="saveArticle()">add</a>
+        <a href="{{ path('listArticle') }}" onclick="saveArticle()" class="btn btn-success btn-lg">Valider</a>
         {% if delete is defined and delete %}
-            <a class="del" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">suppression</a>
+            <a class="del btn btn-danger btn-lg" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">Suppression</a>
         {% endif %}
     </div>
     <div class="col-md-2 image">
