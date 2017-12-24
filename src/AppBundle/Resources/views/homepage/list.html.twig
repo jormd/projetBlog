@@ -23,7 +23,7 @@
                     <div class="addComment">
                         <form method="post" action="{{ path('addCommentaire', {'article' : article.id}) }}" name="Commentaire">
                             <input type="text" name="Commentaire[texte]" class="tinymce">
-                            <button id="submit" type="button" onclick="saveComment()" class="btn btn-success btn-lg">valider</button>
+                            <button id="submit" type="button" onclick="saveComment()" class="btn btn-success btn-sm">valider</button>
                         </form>
                     </div>
                 {% endif %}

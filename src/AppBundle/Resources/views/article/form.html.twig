@@ -3,11 +3,18 @@
 {% block body %}
     <div class="col-md-10">
         {{ form_start(form) }}
-        {{ form_widget(form) }}
+        <div>
+            {{ form_label(form.title) }}
+            {{ form_widget(form.title, {'attr': {'class' :'form-control'}}) }}
+        </div>
+        <div>
+            {{ form_label(form.body) }}
+            {{ form_widget(form.body) }}
+        </div>
         {{ form_end(form) }}
-        <a href="{{ path('listArticle') }}" onclick="saveArticle()" class="btn btn-success btn-lg">Valider</a>
+        <a href="{{ path('listArticle') }}" onclick="saveArticle()" class="btn btn-success btn-sm">Valider</a>
         {% if delete is defined and delete %}
-            <a class="del btn btn-danger btn-lg" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">Suppression</a>
+            <a class="del btn btn-danger btn-sm" href="#" data-href="{{ path('deleteArticle', {'article' : article.id}) }}">Suppression</a>
         {% endif %}
     </div>
     <div class="col-md-2 image">
