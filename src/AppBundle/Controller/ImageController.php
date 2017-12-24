@@ -12,12 +12,17 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Form\Type\ImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ImageController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function addImageAction(Request $request)
     {
         $image = new Image();
@@ -30,23 +35,26 @@ class ImageController extends Controller
             ['action' => $url]
         )->handleRequest($request);
 
-        if($form->isValid()){
-            $image->setImageName($image->getFile()->getClientOriginalName());
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($image);
-            $em->flush();
+        $img = $_FILES['image_file'];
+        $file = new File($img['tmp_name']);
+        $file->move(
+            $this->getParameter('upload_destination'),
+            $img['name']
+        );
 
-            return new JsonResponse([
-                'code' => 'success',
-                'html' => $this->renderView('AppBundle:image:image.html.twig', [
-                    'image' => $image
-                ])
-            ]);
-        }
-        else{
-            var_dump($form->getErrorsAsString());die();
-        }
+        $image->setFile($file);
+        $image->setImageName($img['name']);
 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($image);
+        $em->flush();
+
+        return new JsonResponse([
+            'code' => 'success',
+            'html' => $this->renderView('AppBundle:image:image.html.twig', [
+                'image' => $image
+            ])
+        ]);
     }
 }
