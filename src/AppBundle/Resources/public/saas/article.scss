@@ -1,7 +1,32 @@
+.commentaire{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  margin-bottom: 21px;
+  background-color: #cccccc;
+  border-radius: 4px;
+}
+
+.connexion{
+  width: 35%;
+  height: 15%;
+}
+
+.commentaire_edit{
+  display: flex;
+  background-color: #cccccc;
+  border-radius: 4px;
+}
+
+.btn{
+  margin-top: 5px;
+}
+
 .Article{
 
   .header{
     text-align: center;
+    padding-bottom: 22px;
   }
 
   .datePublic{
@@ -9,22 +34,21 @@
     size: 8px;
   }
 
-  .commentaire{
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #C9BCB9;
-    border-radius: 4px;
+  .addComment{
+    button.btn{
+      text-align: right;
+    }
   }
 
   .listeArticle{
+    a.lien{
+      color: white;
+    }
     .cartouche{
       padding: 5px;
       margin-bottom: 4px;
-      background-color: #777;
+      background-color: #999999;
       font-size: 10px;
-      a.lien{
-        color: white;
-      }
       span.dateArticle{
           text-align: right;
           color: white;
@@ -34,3 +58,56 @@
   }
 }
 
+.image{
+  max-height: 580px;
+  overflow-x: scroll;
+  img{
+    padding-top: 10px;
+  }
+}
+
+.date{
+  text-align: right;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(http://www.blog.test.fr//MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+  local('MaterialIcons-Regular'),
+  url(http://www.blog.test.fr//MaterialIcons-Regular.woff2) format('woff2'),
+  url(http://www.blog.test.fr//MaterialIcons-Regular.woff) format('woff'),
+  url(http://www.blog.test.fr//MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.editDelete{
+  display: flex;
+  flex-direction: column;
+}

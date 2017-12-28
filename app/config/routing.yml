@@ -12,7 +12,7 @@ userBundle:
     resource: "@UserBundle/Resources/config/routing.yml"
 
 appBundle:
-    resource: "@AppBundle/Resources/Config/routing.yml"
+    resource: "@AppBundle/Resources/config/routing.yml"
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

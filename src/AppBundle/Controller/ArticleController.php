@@ -10,7 +10,9 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Image;
 use AppBundle\Form\Type\ArticleType;
+use AppBundle\Form\Type\ImageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,14 +39,28 @@ class ArticleController extends Controller
             ["action" => $url]
             )->handleRequest($request);
 
+
+        $article->setBody('ceci est le corps');
+        $article->setTitle('Ceci est un titre');
+
         $article->setAuteur($this->getUser());
 
         $em->persist($article);
         $em->flush();
 
+        $url = $this->generateUrl('addImage');
+
+        $formImage = $this->createForm(
+            new ImageType(),
+            new Image(),
+            ['action' => $url]
+        );
+
         return $this->render('@App/article/form.html.twig',[
             'form' => $form->createView(),
-            'article' => $article
+            'article' => $article,
+            'images' => $em->getRepository('AppBundle:Image')->findAll(),
+            'formImage' => $formImage->createView()
         ]);
     }
 
@@ -59,6 +75,8 @@ class ArticleController extends Controller
     {
         if($article->getAuteur()->getId() == $this->getUser()->getId() ||
             $this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $em = $this->getDoctrine()->getManager();
+
             $url = $this->generateUrl('addArticle');
 
             $form = $this->createForm(
@@ -67,9 +85,20 @@ class ArticleController extends Controller
                 ["action" => $url]
             )->handleRequest($request);
 
-            return $this->render('@App/article/editionArticle.twig', [
+            $url = $this->generateUrl('addImage');
+
+            $formImage = $this->createForm(
+                new ImageType(),
+                new Image(),
+                ['action' => $url]
+            );
+
+            return $this->render('@App/article/form.html.twig', [
                 'form' => $form->createView(),
-                'article' => $article
+                'article' => $article,
+                'images' => $em->getRepository('AppBundle:Image')->findAll(),
+                'formImage' => $formImage->createView(),
+                'delete' => true
             ]);
         }
         return new JsonResponse([
@@ -120,7 +149,13 @@ class ArticleController extends Controller
         if ($form->isValid())
         {
 
-            $article->setAuteur($this->getUser());
+            if(empty($article->getBody())){
+                $article->setBody('ceci est le corps');
+            }
+            if(empty($article->getTitle())){
+                $article->setTitle('Ceci est un titre');
+            }
+
 
             $em->persist($article);
             $em->flush();

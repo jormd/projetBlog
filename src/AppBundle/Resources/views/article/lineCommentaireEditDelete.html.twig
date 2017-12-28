@@ -1,11 +1,15 @@
-<div id="commentaire{{ commentaire.id }}">
-    <div class="col-sm-10">
+<div id="commentaire{{ commentaire.id }}" class="commentaire_edit">
+    <div class="col-sm-11">
             <p>{{ commentaire.texte|raw }}</p>
-            <p>{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
+            <p class="date">{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
     </div>
-    <div class="col-sm-2">
-        <a class="edit" href="#" data-href="{{ path('editCommentaire', {'commentaire' : commentaire.id}) }}">edit</a>
-        <a class="delete" href="#" data-href="{{ path('deleteCommentaire', {'commentaire' : commentaire.id}) }}">delete</a>
+    <div class="col-sm-1 editDelete">
+        <a class="edit" href="#" data-href="{{ path('editCommentaire', {'commentaire' : commentaire.id}) }}">
+            <i class="material-icons">mode_edit</i>
+        </a>
+        <a class="delete" href="#" data-href="{{ path('deleteCommentaire', {'commentaire' : commentaire.id}) }}">
+            <i class="material-icons">delete</i>
+        </a>
     </div>
 </div>
 

@@ -23,21 +23,21 @@
                     <div class="addComment">
                         <form method="post" action="{{ path('addCommentaire', {'article' : article.id}) }}" name="Commentaire">
                             <input type="text" name="Commentaire[texte]" class="tinymce">
-                            <a id="submit" type="submit" onclick="saveComment()">valider</a>
+                            <button id="submit" type="button" onclick="saveComment()" class="btn btn-success btn-sm">valider</button>
                         </form>
                     </div>
                 {% endif %}
             </div>
             <div class="col-sm-2 listeArticle">
                 {% for oneArticle in articles %}
-                    <div class="cartouche">
-                        <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}" class="lien">
+                    <a href="{{ path('showOneArticle', {'article' : oneArticle.id}) }}" class="lien">
+                        <div class="cartouche">
                             <span>{{ oneArticle.title }}</span>
-                        </a>
-                        <br>
-                        <span class="dateArticle">{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
-                    </div>
-                {% endfor %}
+                            <br>
+                            <span class="dateArticle">{{ oneArticle.datePublication|date('Y-m-d', "Europe/Paris") }}</span>
+                        </div>
+                    </a>
+            {% endfor %}
             </div>
         </div>
 
