@@ -81,7 +81,8 @@
                 data: form_data,
                 type: 'post',
                 success: function (data) {
-                    $('.image').append(data.html);
+                    var parsed = JSON.parse(data);
+                    $('.image').append(parsed.html);
                 }
             });
 
