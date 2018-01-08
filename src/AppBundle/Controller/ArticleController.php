@@ -246,7 +246,11 @@ class ArticleController extends Controller
             $em->flush();
 
             return new JsonResponse([
-                'code' => 'success'
+                'code' => 'success',
+                'id' => $article->getId(),
+                'html' => $this->renderView('@App/article/line_article.html.Twig', [
+                    'article' => $article
+                ])
             ]);
         }
 

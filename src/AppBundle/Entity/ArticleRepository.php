@@ -20,7 +20,8 @@ class ArticleRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a');
 
-        $qb->where($qb->expr()->eq('a.publier', true));
+        $qb->where($qb->expr()->eq('a.publier', true))
+            ->orderBy('a.datePublication', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

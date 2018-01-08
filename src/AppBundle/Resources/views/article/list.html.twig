@@ -5,13 +5,13 @@
         <div class="col-sm-4">
             <h1>Liste des articles</h1>
             {% for article in articles %}
-                <div data-id="{{ article.id }}">
+                <div id="article-{{ article.id }}" data-id="{{ article.id }}">
                     <input type="checkbox"
                             {% if article.publier %}
                                 checked
                             {% endif %}
                     >
-                    <a href="{{ path('editArticle', {'article' : article.id}) }}">{{ article.title }}</a>
+                    {% include '@App/article/line_article.html.Twig' with {'article' : article} %}
                 </div>
             {% endfor %}
         </div>
@@ -39,7 +39,9 @@
                     var route = '{{ path('publishArticle', {'article':"PLACEHOLDER"}) }}';
 
                     route = route.replace("PLACEHOLDER", id);
-                    $.post(route)
+                    $.post(route, function (data) {
+                        $('#article-'+data.id).find('.title-article-a').replaceWith(data.html);
+                    })
                 })
             }
         });
@@ -47,9 +49,6 @@
         $(document).on('click', '.delete',  function (e) {
            e.stopImmediatePropagation();
            $.post($(this).attr('data-href'), function (data) {
-               console.log('hi');
-               console.log(data.id);
-               console.log($(document).find('#commentaire'.concat(data.id)));
                $(document).find('#commentaire'.concat(data.id)).remove();
            });
         });

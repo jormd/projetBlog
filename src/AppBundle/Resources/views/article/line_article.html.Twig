@@ -1,0 +1,1 @@
+<a class="title-article-a" href="{{ path('editArticle', {'article' : article.id}) }}">{{ article.title }}{% if article.datePublication is not null %} - {{ article.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}{% endif %}</a>
