@@ -16,6 +16,7 @@
   display: flex;
   background-color: #cccccc;
   border-radius: 4px;
+  margin-bottom: 1%;
 }
 
 .btn{
@@ -110,4 +111,5 @@
 .editDelete{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }

@@ -27,9 +27,21 @@
                     <a class="navbar-brand" href="{{ path('addArticle') }}">
                         ajout Article
                     </a>
-                    <a class="navbar-brand" href="{{ path('fos_user_security_logout') }}">
-                        deconnection
+                    <a href="#" class="dropdown-toggle navbar-brand" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">settings</i>
                     </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="navbar-brand" href="{{ path('fos_user_profile_edit') }}">
+                                éditer le profil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="navbar-brand" href="{{ path('fos_user_security_logout') }}">
+                                deconnection
+                            </a>
+                        </li>
+                    </ul>
+
                 {% else %}
                     <a class="navbar-brand" href="{{ path('fos_user_registration_register') }}">
                         inscription
