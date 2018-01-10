@@ -185,7 +185,7 @@ class ArticleController extends Controller
 
         if($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
             $articles = $em->getRepository('AppBundle:Article')->findAll();
-            $commentaires = $em->getRepository('AppBundle:Commentaire')->findAll();
+            $commentaires = $em->getRepository('AppBundle:Commentaire')->findAllCommentaire();
         }
         else{
             $articles = $em->getRepository('AppBundle:Article')->findByUser($this->getUser());

@@ -20,7 +20,18 @@ class CommentaireRepository extends EntityRepository
         $qb->innerJoin('c.article', 'article')
             ->innerJoin('article.auteur', 'auteur', 'with', 'auteur.id = :auteur')
             ->setParameter('auteur', $user->getId())
-            ->orderBy('c.dateCreation', 'ASC');
+            ->orderBy('c.dateCreation', 'DESC')
+            ->setMaxResults(15);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAllCommentaire(){
+        $qb = $this->createQueryBuilder('c');
+
+        $qb->innerJoin('c.article', 'article')
+            ->orderBy('c.dateCreation', 'DESC')
+            ->setMaxResults(15);
 
         return $qb->getQuery()->getResult();
     }
