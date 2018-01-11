@@ -12,7 +12,7 @@
                         {{ article.body|raw }}
                     </div>
                     <div class="datePublic">
-                        <p>{{ article.datePublication|date('Y-m-d h:m:s', "Europe/Paris") }}</p>
+                        <p>Publiée par {{ article.auteur }}</p><p>Le {{ article.datePublication|date('d-m-Y h:m:s', "Europe/Paris") }}</p>
                     </div>
                     <div class="comment">
                         <h2>Commentaire</h2>
