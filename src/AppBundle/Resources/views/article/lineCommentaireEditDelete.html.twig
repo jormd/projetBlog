@@ -1,7 +1,8 @@
 <div id="commentaire{{ commentaire.id }}" class="commentaire_edit">
     <div class="col-sm-11">
             <p>{{ commentaire.texte|raw }}</p>
-            <p class="date">{{ commentaire.dateCreation|date('Y-m-d', "Europe/Paris") }}</p>
+            <p class="date">{{ commentaire.dateCreation|date('d-m-Y', "Europe/Paris") }}</p>
+            <p class="article-commentaire">article : <a href="{{ path('showOneArticle', {'article' : commentaire.article.id}) }}" data-toggle="tooltip" title="{{ commentaire.article.title }}">{{ commentaire.article.title|slice(0, 40) }}</a></p>
     </div>
     <div class="col-sm-1 editDelete">
         <a class="edit" href="#" data-href="{{ path('editCommentaire', {'commentaire' : commentaire.id}) }}">

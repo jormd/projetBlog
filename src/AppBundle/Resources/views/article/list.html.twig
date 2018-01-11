@@ -80,7 +80,11 @@
                $('form').replaceWith(data.html);
             });
 
-        })
+        });
+
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
 
 
